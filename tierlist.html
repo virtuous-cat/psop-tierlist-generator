@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pokemon Smash or Pass Tier List Generator</title>
+    <link href="/style.css" rel="stylesheet" type="text/css" media="all" />
+  </head>
+  <body>
+    <div class="intro">
+      <p>
+        Congratulations, you smashed <span id="smash-number"></span> out of 898
+        pokemon!
+      </p>
+      <p>That's <span id="smash-percent"></span>%!</p>
+      <p>Now, RANK THEM:</p>
+    </div>
+    <div class="tier-grid">
+      <div class="rank-label">S</div>
+      <div class="rank-slot sprites-container" id="s-slot"></div>
+      <div class="rank-label">A</div>
+      <div class="rank-slot sprites-container" id="a-slot"></div>
+      <div class="rank-label">B</div>
+      <div class="rank-slot sprites-container" id="b-slot"></div>
+      <div class="rank-label">C</div>
+      <div class="rank-slot sprites-container" id="c-slot"></div>
+      <div class="rank-label">D</div>
+      <div class="rank-slot sprites-container" id="d-slot"></div>
+    </div>
+    <div class="sprites-container" id="unranked-slot"></div>
+    <script
+      src="https://cdn.jsdelivr.net/gh/macmcmeans/localDataStorage@master/localDataStorage-2.0.0.min.js"
+      integrity="sha512-LWDNA967l6GIvNL3geN+hC7OMAfLDDUN1RdXUb8lLABMAbmOlbO6HUPJx84rzFH7wEqnJq9AEM59cLzRElv9QQ=="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://unpkg.com/pokeapi-js-wrapper@1.2.2/dist/index.js"
+      integrity="sha384-eZUTiCPUh7WLzgtC981JCaJN343A2o+6AybgCea+bwFKAThs0PRp4vkQnChew8KH"
+      crossorigin="anonymous"
+    ></script>
+    <script src="teirlist.js"></script>
+  </body>
+</html>

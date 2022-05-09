@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script
+      src="https://cdn.jsdelivr.net/gh/macmcmeans/localDataStorage@master/localDataStorage-2.0.0.min.js"
+      integrity="sha512-LWDNA967l6GIvNL3geN+hC7OMAfLDDUN1RdXUb8lLABMAbmOlbO6HUPJx84rzFH7wEqnJq9AEM59cLzRElv9QQ=="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://unpkg.com/pokeapi-js-wrapper/dist/index.js"
+      integrity="sha384-eZUTiCPUh7WLzgtC981JCaJN343A2o+6AybgCea+bwFKAThs0PRp4vkQnChew8KH"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      const dex = new Pokedex.Pokedex();
+      // dex.getPokemonsList().then((res) => console.log(res));
+      dex.getPokemonByName(898).then((res) => console.log(res));
+    </script>
+  </body>
+</html>
