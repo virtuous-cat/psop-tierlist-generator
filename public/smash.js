@@ -2,6 +2,10 @@ const localData = localDataStorage("smash");
 
 const dex = new Pokedex.Pokedex();
 
+if (!localData.haskey("smashedPokemon")) {
+  localData.set("smashedPokemon", []);
+}
+
 const clearButton = document.querySelector("#clear");
 clearButton.addEventListener("click", () => {
   localData.clear();
