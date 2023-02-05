@@ -5,7 +5,7 @@ const dex = new Pokedex.Pokedex();
 const clearButton = document.querySelector("#clear");
 clearButton.addEventListener("click", () => {
   localData.clear();
-  window.location.href = "/";
+  window.location = "https://pokesmash.neocities.org/";
 });
 
 let currentPokemonId = localData.haskey("lastPokemonId")
@@ -17,30 +17,30 @@ if (currentPokemonId > 1) {
   prevButton.classList.remove("hidden");
 }
 
-const loadPokemon = async (id) => {
-  try {
-    const pokemon = await dex.getPokemonByName(id);
-    const name = document.querySelector("#name");
-    name.innerText = pokemon.name;
-    const height = document.querySelector("#height");
-    height.innerText = pokemon.height;
-    const weight = document.querySelector("#weight");
-    weight.innerText = pokemon.weight;
-    const idNumber = document.querySelector("#idNumber");
-    idNumber.innerText = id;
-    const types = document.querySelector("#types");
-    types.innerText = pokemon.types[0].type.name;
-    pokemon.types.forEach((type, i) => {
-      if (i >= 1) {
-        types.append(`/${type.type.name}`);
-      }
-    });
-    const sprite = document.querySelector("img");
-    sprite.setAttribute("src", `/img/${id}.png`);
-    return { name: pokemon.name, id: id };
-  } catch (e) {
-    console.log(e);
-  }
+const loadPokemon = (id) => {
+  dex
+    .getPokemonByName(id)
+    .then((pokemon) => {
+      const name = document.querySelector("#name");
+      name.innerText = pokemon.name;
+      const height = document.querySelector("#height");
+      height.innerText = pokemon.height;
+      const weight = document.querySelector("#weight");
+      weight.innerText = pokemon.weight;
+      const idNumber = document.querySelector("#idNumber");
+      idNumber.innerText = id;
+      const types = document.querySelector("#types");
+      types.innerText = pokemon.types[0].type.name;
+      pokemon.types.forEach((type, i) => {
+        if (i >= 1) {
+          types.append(`/${type.type.name}`);
+        }
+      });
+      const sprite = document.querySelector("img");
+      sprite.setAttribute("src", `/img/${id}.png`);
+      return { name: pokemon.name, id: id };
+    })
+    .catch((e) => console.log(e));
 };
 
 let currentPokemon = loadPokemon(currentPokemonId);
@@ -68,7 +68,7 @@ const goToPrevPokemon = () => {
   }
 };
 
-const smash = async () => {
+const smash = () => {
   if (!localData.contains("smashedPokemon", currentPokemon)) {
     localData.push("smashedPokemon", currentPokemon);
   }
@@ -76,7 +76,7 @@ const smash = async () => {
   currentPokemon = loadPokemon(currentPokemonId);
 };
 
-const pass = async () => {
+const pass = () => {
   if (localData.contains("smashedPokemon", currentPokemon)) {
     localData.pull("smashedPokemon", currentPokemon);
   }
@@ -84,7 +84,7 @@ const pass = async () => {
   currentPokemon = loadPokemon(currentPokemonId);
 };
 
-const prev = async () => {
+const prev = () => {
   goToPrevPokemon();
   currentPokemon = loadPokemon(currentPokemonId);
 };
