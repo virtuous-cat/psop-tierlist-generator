@@ -11,6 +11,7 @@ clearButton.addEventListener("click", () => {
 let currentPokemonId = localData.haskey("lastPokemonId")
   ? localData.get("lastPokemonId") + 1
   : 1;
+console.log(currentPokemonId);
 
 const prevButton = document.querySelector("#prev");
 if (currentPokemonId > 1) {
@@ -18,26 +19,27 @@ if (currentPokemonId > 1) {
 }
 
 const loadPokemon = (id) => {
+  const idNumber = document.querySelector("#idNumber");
+  idNumber.innerText = id;
+  const sprite = document.querySelector("img");
+  sprite.setAttribute("src", `/img/${id}.png`);
+  const name = document.querySelector("#name");
+  const height = document.querySelector("#height");
+  const weight = document.querySelector("#weight");
+  const types = document.querySelector("#types");
   dex
     .getPokemonByName(id)
     .then((pokemon) => {
-      const name = document.querySelector("#name");
+      console.log(pokemon);
       name.innerText = pokemon.name;
-      const height = document.querySelector("#height");
       height.innerText = pokemon.height;
-      const weight = document.querySelector("#weight");
       weight.innerText = pokemon.weight;
-      const idNumber = document.querySelector("#idNumber");
-      idNumber.innerText = id;
-      const types = document.querySelector("#types");
       types.innerText = pokemon.types[0].type.name;
       pokemon.types.forEach((type, i) => {
         if (i >= 1) {
           types.append(`/${type.type.name}`);
         }
       });
-      const sprite = document.querySelector("img");
-      sprite.setAttribute("src", `/img/${id}.png`);
       return { name: pokemon.name, id: id };
     })
     .catch((e) => console.log(e));
