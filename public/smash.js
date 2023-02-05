@@ -75,11 +75,13 @@ const goToPrevPokemon = () => {
 };
 
 const smash = () => {
+  console.log("current pokemon", currentPokemon);
   if (!localData.contains("smashedPokemon", currentPokemon)) {
     localData.push("smashedPokemon", currentPokemon);
   }
   goToNextPokemon();
   currentPokemon = loadPokemon(currentPokemonId);
+  console.log("now loading", currentPokemon);
 };
 
 const pass = () => {
