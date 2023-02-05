@@ -31,7 +31,7 @@ const loadPokemon = (id) => {
   const height = document.querySelector("#height");
   const weight = document.querySelector("#weight");
   const types = document.querySelector("#types");
-  dex
+  const newPokemon = dex
     .getPokemonByName(id)
     .then((pokemon) => {
       console.log(pokemon);
@@ -47,6 +47,7 @@ const loadPokemon = (id) => {
       return { name: pokemon.name, id: id };
     })
     .catch((e) => console.log(e));
+  return newPokemon;
 };
 
 let currentPokemon = loadPokemon(currentPokemonId);
