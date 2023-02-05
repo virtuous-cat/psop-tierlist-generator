@@ -6,15 +6,15 @@ if (localData.haskey("lastPokemonId")) {
 
   const p = document.createElement("p");
   const resetButton = document.createElement("a");
-  resetButton.innerText = "Start Fresh";
+  resetButton.innerText = "Clear Data and Start Fresh";
   resetButton.setAttribute("href", "/smash.html");
 
-  if (localData.get("lastPokemonId") < 898) {
+  if (localData.get("lastPokemonId") < 1008) {
     p.innerText = "Looks like you've already have a smash list going!";
     startButton.innerText = "Continue Smashing";
   }
 
-  if (localData.get("lastPokemonId") === 898) {
+  if (localData.get("lastPokemonId") === 1008) {
     p.innerText =
       "Looks like you've already have a tierlist built or in progress!";
     startButton.innerText = "Skip to Tierlist";
@@ -23,14 +23,5 @@ if (localData.haskey("lastPokemonId")) {
 
   buttonGroup.before(p);
   startButton.after("Or", resetButton);
-  resetButton.addEventListener("click", () => {
-    localData.remove("lastPokemonId");
-    localData.remove("smashedPokemon");
-  });
-  resetButton.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") {
-      localData.remove("lastPokemonId");
-      localData.remove("smashedPokemon");
-    }
-  });
+  resetButton.addEventListener("click", () => localData.clear());
 }

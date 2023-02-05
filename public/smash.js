@@ -2,6 +2,12 @@ const localData = localDataStorage("smash");
 
 const dex = new Pokedex.Pokedex();
 
+const clearButton = document.querySelector("#clear");
+clearButton.addEventListener("click", () => {
+  localData.clear();
+  window.location.href = "/";
+});
+
 let currentPokemonId = localData.haskey("lastPokemonId")
   ? localData.get("lastPokemonId") + 1
   : 1;
@@ -44,7 +50,7 @@ const goToNextPokemon = () => {
   if (currentPokemonId === 1) {
     prevButton.classList.remove("hidden");
   }
-  if (currentPokemonId === 898) {
+  if (currentPokemonId === 1008) {
     window.location.href = "/tierlist.html";
   }
   currentPokemonId++;
@@ -87,22 +93,22 @@ const smashButton = document.querySelector("#smash");
 const passButton = document.querySelector("#pass");
 
 smashButton.addEventListener("click", smash);
-smashButton.addEventListener("keydown", (e) => {
-  if (e.key === "Enter") {
-    smash();
-  }
-});
+// smashButton.addEventListener("keydown", (e) => {
+//   if (e.key === "Enter") {
+//     smash();
+//   }
+// });
 
 passButton.addEventListener("click", pass);
-passButton.addEventListener("keydown", (e) => {
-  if (e.key === "Enter") {
-    pass();
-  }
-});
+// passButton.addEventListener("keydown", (e) => {
+//   if (e.key === "Enter") {
+//     pass();
+//   }
+// });
 
 prevButton.addEventListener("click", prev);
-prevButton.addEventListener("keydown", (e) => {
-  if (e.key === "Enter") {
-    prev();
-  }
-});
+// prevButton.addEventListener("keydown", (e) => {
+//   if (e.key === "Enter") {
+//     prev();
+//   }
+// });
