@@ -6,7 +6,16 @@ clearButton.addEventListener("click", () => {
   window.location.href = "/";
 });
 
-const smashedPokemon = localData.get("smashedPokemon");
+const intro = document.querySelector(".intro");
+
+if (!localData.haskey("smashedPokemon")) {
+  intro.innerHTML =
+    "<p>You haven't smashed any Pokemon yet.</p><a href='/'>Return to the start to get smashing!</a>";
+}
+
+const smashedPokemon = localData.haskey("smashedPokemon")
+  ? localData.get("smashedPokemon")
+  : [];
 const smashedIds = smashedPokemon.map((pokemon) => pokemon.id);
 
 const sSlot = document.querySelector("#s");
@@ -52,16 +61,12 @@ drake.on(drop, (el, target, source, sibling) => {
 });
 
 function populate() {
-  if (!localData.haskey("smashedPokemon")) {
-    const intro = document.querySelector(".intro");
-    intro.innerHTML =
-      "<p>You haven't smashed any Pokemon yet.</p><a href='/'>Return to the start to get smashing!</a>";
-    return;
-  }
-
   const smashNumber = document.querySelector("#smash-number");
   const smashPercent = document.querySelector("#smash-percent");
   smashNumber.innerText = `${smashedPokemon.length}`;
+  if (!smashedPokemon.length || !smashedIds.length) {
+    return;
+  }
   smashPercent.innerText = `${Math.round(
     (smashedPokemon.length / 1008) * 100
   )}`;
