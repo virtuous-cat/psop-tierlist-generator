@@ -41,6 +41,7 @@ saveButton.addEventListener("click", () => {
   });
 });
 
+//TODO: debug dragging
 const drake = dragula([sSlot, aSlot, bSlot, cSlot, dSlot, unrankedSlot], {
   revertOnSpill: true,
   direction: "horizontal",
@@ -48,7 +49,7 @@ const drake = dragula([sSlot, aSlot, bSlot, cSlot, dSlot, unrankedSlot], {
 
 drake.on("drop", (el, target, source, sibling) => {
   const pokemonId = parseInt(el.getAttribute("data-id"));
-  const siblingId = parseInt(sibling.getAttribute("data-id"));
+  const siblingId = sibling ? parseInt(sibling.getAttribute("data-id")) : null;
   const targetRank = target.id;
   const sourceSlot = source.id;
   if (sourceSlot !== "unranked" && localData.contains(sourceSlot, pokemonId)) {
