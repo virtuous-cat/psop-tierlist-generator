@@ -5,7 +5,6 @@ const dex = new Pokedex.Pokedex();
 const clearButton = document.querySelector("#clear");
 clearButton.addEventListener("click", () => {
   localData.clear();
-  // window.location = "https://pokesmash.neocities.org/";
   window.location.href = "/";
 });
 
@@ -60,7 +59,6 @@ const loadPokemon = async (id) => {
   }
 };
 
-// let currentPokemon = loadPokemon(currentPokemonId);
 const loadInitialPokemon = async () => {
   await loadPokemon(currentPokemonId);
 };

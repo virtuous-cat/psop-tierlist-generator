@@ -3,7 +3,7 @@ const localData = localDataStorage("smash");
 const clearButton = document.querySelector("#clear");
 clearButton.addEventListener("click", () => {
   localData.clear();
-  window.location = "https://pokesmash.neocities.org/";
+  window.location.href = "/";
 });
 
 const smashedPokemon = localData.get("smashedPokemon");
@@ -72,7 +72,7 @@ function populate() {
   const c = localData.haskey("c") ? localData.get("c") : [];
   const d = localData.haskey("d") ? localData.get("d") : [];
   const ranked = [...s, ...a, ...b, ...c, ...d];
-  const unranked = smashedId.filter((pokemonId) => {
+  const unranked = smashedIds.filter((pokemonId) => {
     return !ranked.includes(pokemonId);
   });
 
