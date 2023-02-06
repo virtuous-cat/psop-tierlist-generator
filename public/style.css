@@ -120,6 +120,7 @@ body {
 
 .sprites-container {
   display: flex;
+  flex-grow: 1;
   flex-wrap: wrap;
   min-height: 100px;
 }
