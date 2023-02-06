@@ -30,10 +30,10 @@ const dialog = document.querySelector("dialog");
 saveButton.addEventListener("click", () => {
   dialog.showModal();
   const tierList = document.querySelector(".tier-grid");
-  html2canvas(tierList).then((canvas) => dialog.append(canvas));
   const closeButton = document.createElement("button");
   closeButton.innerText = "Close";
   dialog.append(closeButton);
+  html2canvas(tierList).then((canvas) => closeButton.before(canvas));
   closeButton.addEventListener("click", () => {
     dialog.close();
     dialog.querySelector("canvas").remove();

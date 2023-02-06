@@ -118,7 +118,7 @@ body {
   border-top: none;
 }
 
-.sprite-container {
+.sprites-container {
   display: flex;
   flex-wrap: wrap;
   min-height: 100px;
