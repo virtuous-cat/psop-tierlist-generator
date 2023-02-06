@@ -5,9 +5,8 @@ if (localData.haskey("lastPokemonId")) {
   const buttonGroup = document.querySelector(".button-wrapper");
 
   const p = document.createElement("p");
-  const resetButton = document.createElement("a");
+  const resetButton = document.createElement("button");
   resetButton.innerText = "Clear Data and Start Fresh";
-  resetButton.setAttribute("href", "/smash.html");
 
   if (localData.get("lastPokemonId") < 1008) {
     p.innerText = "Looks like you've already have a smash list going!";
@@ -23,5 +22,8 @@ if (localData.haskey("lastPokemonId")) {
 
   buttonGroup.before(p);
   startButton.after("Or", resetButton);
-  resetButton.addEventListener("click", () => localData.clear());
+  resetButton.addEventListener("click", () => {
+    localData.clear();
+    location.reload();
+  });
 }
