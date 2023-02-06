@@ -29,20 +29,22 @@ populate();
 
 const saveButton = document.querySelector("#save");
 const dialog = document.querySelector("dialog");
-saveButton.addEventListener("click", () => dialog.showModal());
-const tierList = document.querySelector(".tier-grid");
-html2canvas(tierList).then((canvas) => dialog.append(canvas));
-const closeButton = document.createElement("button");
-closeButton.innerText = "Close";
-dialog.append(closeButton);
-closeButton.addEventListener("click", () => dialog.close());
+saveButton.addEventListener("click", () => {
+  dialog.showModal();
+  const tierList = document.querySelector(".tier-grid");
+  html2canvas(tierList).then((canvas) => dialog.append(canvas));
+  const closeButton = document.createElement("button");
+  closeButton.innerText = "Close";
+  dialog.append(closeButton);
+  closeButton.addEventListener("click", () => dialog.close());
+});
 
 const drake = dragula([sSlot, aSlot, bSlot, cSlot, dSlot, unrankedSlot], {
   revertOnSpill: true,
   direction: "horizontal",
 });
 
-drake.on(drop, (el, target, source, sibling) => {
+drake.on("drop", (el, target, source, sibling) => {
   const pokemonId = parseInt(el.getAttribute("data-id"));
   const siblingId = parseInt(sibling.getAttribute("data-id"));
   const targetRank = target.id;
