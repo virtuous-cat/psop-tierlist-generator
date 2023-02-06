@@ -61,12 +61,12 @@ drake.on(drop, (el, target, source, sibling) => {
 });
 
 function populate() {
-  const smashNumber = document.querySelector("#smash-number");
-  const smashPercent = document.querySelector("#smash-percent");
-  smashNumber.innerText = `${smashedPokemon.length}`;
   if (!smashedPokemon.length || !smashedIds.length) {
     return;
   }
+  const smashNumber = document.querySelector("#smash-number");
+  const smashPercent = document.querySelector("#smash-percent");
+  smashNumber.innerText = `${smashedPokemon.length}`;
   smashPercent.innerText = `${Math.round(
     (smashedPokemon.length / 1008) * 100
   )}`;
