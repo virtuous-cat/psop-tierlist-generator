@@ -25,8 +25,6 @@ const cSlot = document.querySelector("#c");
 const dSlot = document.querySelector("#d");
 const unrankedSlot = document.querySelector("#unranked");
 
-populate();
-
 const saveButton = document.querySelector("#save");
 const dialog = document.querySelector("dialog");
 saveButton.addEventListener("click", () => {
@@ -36,7 +34,11 @@ saveButton.addEventListener("click", () => {
   const closeButton = document.createElement("button");
   closeButton.innerText = "Close";
   dialog.append(closeButton);
-  closeButton.addEventListener("click", () => dialog.close());
+  closeButton.addEventListener("click", () => {
+    dialog.close();
+    dialog.querySelector("canvas").remove();
+    closeButton.remove();
+  });
 });
 
 const drake = dragula([sSlot, aSlot, bSlot, cSlot, dSlot, unrankedSlot], {
@@ -61,6 +63,34 @@ drake.on("drop", (el, target, source, sibling) => {
   }
   localData.push(targetRank, pokemonId);
 });
+
+const getName = (pokemonId) => {
+  for (const pokemon of smashedPokemon) {
+    if (pokemon.id === pokemonId) {
+      return pokemon.name;
+    }
+  }
+};
+
+const buildTier = (tier, tierName, slot) => {
+  if (!tier.length) {
+    return;
+  }
+  for (const pokemonId of tier) {
+    if (!smashedIds.includes(pokemonId)) {
+      if (tierName !== "unranked") {
+        localData.pull(tierName, pokemonId, true);
+      }
+      continue;
+    }
+    const sprite = document.createElement("img");
+    sprite.setAttribute("src", `/img/${pokemonId}.png`);
+    sprite.setAttribute("alt", getName(pokemonId));
+    sprite.setAttribute("data-id", `${pokemonId}`);
+    sprite.classList.add("sprite");
+    slot.appendChild(sprite);
+  }
+};
 
 function populate() {
   if (!smashedPokemon.length || !smashedIds.length) {
@@ -91,30 +121,4 @@ function populate() {
   buildTier(unranked, "unranked", unrankedSlot);
 }
 
-const buildTier = (tier, tierName, slot) => {
-  if (!tier.length) {
-    return;
-  }
-  for (const pokemonId of tier) {
-    if (!smashedIds.includes(pokemonId)) {
-      if (tierName !== "unranked") {
-        localData.pull(tierName, pokemonId, true);
-      }
-      continue;
-    }
-    const sprite = document.createElement("img");
-    sprite.setAttribute("src", `/img/${pokemonId}.png`);
-    sprite.setAttribute("alt", getName(pokemonId));
-    sprite.setAttribute("data-id", `${pokemonId}`);
-    sprite.classList.add("sprite");
-    slot.appendChild(sprite);
-  }
-};
-
-const getName = (pokemonId) => {
-  for (const pokemon of smashedPokemon) {
-    if (pokemon.id === pokemonId) {
-      return pokemon.name;
-    }
-  }
-};
+populate();
