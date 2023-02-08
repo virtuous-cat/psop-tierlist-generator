@@ -112,20 +112,20 @@ body {
   font-size: clamp(1.1rem, 2vw + 1rem, 2rem);
 }
 
-body.smash-page {
+.smash-body {
   grid-template-rows: 1fr auto;
   grid-template-columns: 1fr;
   align-items: center;
   justify-items: center;
 }
 
-body.home {
+.home-body {
   grid-template-rows: auto 1fr auto;
   grid-template-columns: 1fr;
   /* align-items: center; */
 }
 
-main.home {
+.home-main {
   align-self: self-start;
   display: grid;
   grid-column: 1/-1;
@@ -133,7 +133,7 @@ main.home {
   justify-content: center;
 }
 
-main.smash-page {
+.smash-main {
   display: grid;
   max-width: 72rem;
   grid-row: 1/2;
@@ -150,17 +150,17 @@ main.smash-page {
 
 #smash {
   grid-area: smash;
-  /* justify-self: end;
-  margin-inline-end: 48px; */
-  justify-self: center;
+  justify-self: end;
+  margin-inline-end: 40px;
+  /* justify-self: center; */
   align-self: center;
 }
 
 #pass {
   grid-area: pass;
-  justify-self: center;
+  justify-self: start;
+  margin-inline-start: 40px;
   align-self: center;
-  /* margin-inline-start: 48px; */
 }
 
 .info {
@@ -184,9 +184,6 @@ main.smash-page {
   align-items: center;
   gap: 1rem;
   font-size: 1.7rem;
-}
-
-#name {
 }
 
 footer {
@@ -217,7 +214,7 @@ h1 {
 }
 
 ul {
-  padding: 16px;
+  padding: 0;
 }
 
 .title {
