@@ -29,11 +29,13 @@ const saveButton = document.querySelector("#save");
 const dialog = document.querySelector("dialog");
 saveButton.addEventListener("click", () => {
   dialog.showModal();
-  const tierList = document.querySelector(".tier-grid");
+  const tierList = document.querySelector(".to-save");
   const closeButton = document.createElement("button");
   closeButton.innerText = "Close";
   dialog.append(closeButton);
-  html2canvas(tierList).then((canvas) => closeButton.before(canvas));
+  html2canvas(tierList, {
+    ignoreElements: (element) => element.id === "ignore",
+  }).then((canvas) => closeButton.before(canvas));
   closeButton.addEventListener("click", () => {
     dialog.close();
     dialog.querySelector("canvas").remove();
@@ -41,7 +43,6 @@ saveButton.addEventListener("click", () => {
   });
 });
 
-//TODO: debug dragging
 const drake = dragula([sSlot, aSlot, bSlot, cSlot, dSlot, unrankedSlot], {
   revertOnSpill: true,
   direction: "horizontal",

@@ -9,34 +9,36 @@
   </head>
   <body>
     <main>
-      <div class="intro">
-        <p>
-          Congratulations, you smashed <span id="smash-number"></span> out of
-          1008 pokemon!
-        </p>
-        <p>That's <span id="smash-percent"></span>%!</p>
-        <p>Now, RANK THEM:</p>
-      </div>
-      <div class="tier-grid">
-        <div class="tier">
-          <div class="rank-label">S</div>
-          <div class="rank-slot sprites-container" id="s"></div>
+      <div class="to-save">
+        <div class="intro">
+          <p>
+            Congratulations, you smashed <span id="smash-number"></span> out of
+            1008 pokemon!
+          </p>
+          <p>That's <span id="smash-percent"></span>%!</p>
+          <p id="ignore">Now, RANK THEM:</p>
         </div>
-        <div class="tier">
-          <div class="rank-label">A</div>
-          <div class="rank-slot sprites-container" id="a"></div>
-        </div>
-        <div class="tier">
-          <div class="rank-label">B</div>
-          <div class="rank-slot sprites-container" id="b"></div>
-        </div>
-        <div class="tier">
-          <div class="rank-label">C</div>
-          <div class="rank-slot sprites-container" id="c"></div>
-        </div>
-        <div class="tier">
-          <div class="rank-label">D</div>
-          <div class="rank-slot sprites-container" id="d"></div>
+        <div class="tier-grid">
+          <div class="tier">
+            <div class="rank-label">S</div>
+            <div class="rank-slot sprites-container" id="s"></div>
+          </div>
+          <div class="tier">
+            <div class="rank-label">A</div>
+            <div class="rank-slot sprites-container" id="a"></div>
+          </div>
+          <div class="tier">
+            <div class="rank-label">B</div>
+            <div class="rank-slot sprites-container" id="b"></div>
+          </div>
+          <div class="tier">
+            <div class="rank-label">C</div>
+            <div class="rank-slot sprites-container" id="c"></div>
+          </div>
+          <div class="tier">
+            <div class="rank-label">D</div>
+            <div class="rank-slot sprites-container" id="d"></div>
+          </div>
         </div>
       </div>
       <p>
@@ -55,8 +57,8 @@
         Your tier list is automatically saved to your browser, so you don't have
         to worry about finishing in one go. If you are using a shared computer
         you may wish to clear this data when you're done.
-        <button id="clear">Clear all data and return Home</button>
       </p>
+      <button id="clear">Clear all data and return Home</button>
     </footer>
 
     <script

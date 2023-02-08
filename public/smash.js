@@ -25,7 +25,7 @@ const smashButton = document.querySelector("#smash");
 const passButton = document.querySelector("#pass");
 const prevButton = document.querySelector("#prev");
 if (currentPokemonId > 1) {
-  prevButton.classList.remove("hidden");
+  prevButton.removeAttribute("disabled");
 }
 
 const pokemonName = document.querySelector("#name");
@@ -69,7 +69,7 @@ const goToNextPokemon = () => {
   console.log("before go to next id", currentPokemonId);
   localData.set("lastPokemonId", currentPokemonId);
   if (currentPokemonId === 1) {
-    prevButton.classList.remove("hidden");
+    prevButton.removeAttribute("disabled");
   }
   if (currentPokemonId >= 1008) {
     window.location.href = "/tierlist.html";
@@ -80,6 +80,9 @@ const goToNextPokemon = () => {
 
 const goToPrevPokemon = () => {
   console.log("before go to prev id", currentPokemonId);
+  if (currentPokemonId < 2) {
+    return;
+  }
   if (currentPokemonId > 2) {
     currentPokemonId--;
     localData.set("lastPokemonId", currentPokemonId - 1);
@@ -87,7 +90,7 @@ const goToPrevPokemon = () => {
   if (currentPokemonId === 2) {
     currentPokemonId--;
     localData.remove("lastPokemonId");
-    prevButton.classList.add("hidden");
+    prevButton.setAttribute("disabled", "true");
   }
   console.log("after go to prev id", currentPokemonId);
 };

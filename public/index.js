@@ -2,6 +2,7 @@ const localData = localDataStorage("smash");
 
 if (localData.haskey("lastPokemonId")) {
   const startButton = document.querySelector(".button");
+  const buttonWrapper = document.querySelector(".button-wrapper");
   const p = document.querySelector("#button-intro");
 
   const resetButton = document.createElement("button");
@@ -20,6 +21,7 @@ if (localData.haskey("lastPokemonId")) {
     startButton.setAttribute("href", "/tierlist.html");
   }
 
+  buttonWrapper.classList.add("two-col");
   startButton.after(resetButton);
   resetButton.addEventListener("click", () => {
     localData.clear();

@@ -7,37 +7,37 @@
     <title>Pokemon Smash or Pass Tier List Generator</title>
     <link href="/style.css" rel="stylesheet" type="text/css" media="all" />
   </head>
-  <body>
-    <main>
-      <div class="grid">
-        <img src="" aria-labelledby="name" />
+  <body class="smash-page">
+    <main class="smash-page">
+      <img
+        class="smash-img"
+        src=""
+        aria-labelledby="name"
+        width="304"
+        height="304"
+      />
+      <div class="info">
         <h1 id="name">Loading...</h1>
         <ul>
-          <li>
-            <strong>Height: </strong><span id="height">loading...</span> cm
-          </li>
-          <li>
-            <strong>Weight: </strong><span id="weight">loading...</span> kg
-          </li>
+          <li><strong>Height: </strong><span id="height">0</span> cm</li>
+          <li><strong>Weight: </strong><span id="weight">0</span> kg</li>
           <li><strong>Type: </strong><span id="types">loading...</span></li>
         </ul>
-        <div>
-          <button id="smash" class="smash large">SMASH</button>
-          <button id="pass" class="pass large">PASS</button>
-        </div>
-        <button class="hidden neutral" id="prev">Prev</button>
+      </div>
+      <button id="smash" class="smash large">SMASH</button>
+      <button id="pass" class="pass large">PASS</button>
+      <div class="num">
         <p><span id="idNumber"></span> of 1008</p>
+        <button class="neutral" id="prev" disabled>Prev</button>
       </div>
     </main>
-    <footer>
+    <footer class="smash-page">
       <p>
         Your progress is automatically saved to your browser, so you don't have
         to worry about finishing in one go. If you are using a shared computer
         you may wish to clear this data when you're done.
-        <button id="clear" class="neutral">
-          Clear all data and return Home
-        </button>
       </p>
+      <button id="clear" class="neutral">Clear all data and return Home</button>
     </footer>
     <script
       src="https://cdn.jsdelivr.net/gh/macmcmeans/localDataStorage@master/localDataStorage-3.0.0.min.js"
