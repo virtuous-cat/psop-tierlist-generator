@@ -83,14 +83,14 @@ const goToPrevPokemon = () => {
   if (currentPokemonId < 2) {
     return;
   }
-  if (currentPokemonId > 2) {
-    currentPokemonId--;
-    localData.set("lastPokemonId", currentPokemonId - 1);
-  }
   if (currentPokemonId === 2) {
     currentPokemonId--;
     localData.remove("lastPokemonId");
     prevButton.setAttribute("disabled", "true");
+  }
+  if (currentPokemonId > 2) {
+    currentPokemonId--;
+    localData.set("lastPokemonId", currentPokemonId - 1);
   }
   console.log("after go to prev id", currentPokemonId);
 };
