@@ -112,7 +112,8 @@ body {
   font-size: clamp(1.1rem, 2vw + 1rem, 2rem);
 }
 
-.smash-body {
+.smash-body,
+.tier-body {
   grid-template-rows: 1fr auto;
   grid-template-columns: 1fr;
   align-items: center;
@@ -122,7 +123,6 @@ body {
 .home-body {
   grid-template-rows: auto 1fr auto;
   grid-template-columns: 1fr;
-  /* align-items: center; */
 }
 
 .home-main {
@@ -133,33 +133,40 @@ body {
   justify-content: center;
 }
 
+.tier-main {
+  grid-column: 1/2;
+  grid-row: 1/2;
+  display: grid;
+  /* align-items: center; */
+  justify-items: center;
+  gap: 24px;
+}
+
 .smash-main {
   display: grid;
-  max-width: 72rem;
   grid-row: 1/2;
   grid-column: 1/2;
-  gap: 32px;
-  /* align-items: center; */
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: repeat(3, auto);
+  gap: 24px;
+  justify-items: center;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(5, auto);
   grid-template-areas:
-    "info sprite"
-    "smash pass"
-    "num num";
+    "sprite"
+    "info"
+    "smash"
+    "pass"
+    "num";
 }
 
 #smash {
   grid-area: smash;
-  justify-self: end;
-  margin-inline-end: 40px;
-  /* justify-self: center; */
+  justify-self: stretch;
   align-self: center;
 }
 
 #pass {
   grid-area: pass;
-  justify-self: start;
-  margin-inline-start: 40px;
+  justify-self: stretch;
   align-self: center;
 }
 
@@ -169,12 +176,17 @@ body {
   grid-area: info;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 12px;
+}
+
+#name {
+  font-size: clamp(2.5rem, 5vw + 1.5rem, 4rem);
 }
 
 .smash-img {
   grid-area: sprite;
-  max-width: 19rem;
+  min-width: 100px;
+  aspect-ratio: 1/1;
 }
 
 .num {
@@ -182,7 +194,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  gap: 16px;
   font-size: 1.7rem;
 }
 
@@ -233,12 +245,12 @@ ul {
   margin-bottom: 16px;
 }
 
-.preamble > :not(:first-child) {
+.medium-font {
   font-size: clamp(1rem, 5vw - 1rem, 1.4rem);
 }
 
 #button-intro {
-  margin-bottom: 2rem;
+  margin-bottom: 16px;
 }
 
 .button-wrapper {
@@ -246,27 +258,9 @@ ul {
   max-width: 910px;
   align-items: center;
   justify-items: center;
-  /* grid-template-columns: repeat(
-    auto-fit,
-    minmax(min(14rem, 210px), max-content)
-    ); */
   row-gap: 16px;
   column-gap: 32px;
   justify-content: center;
-}
-
-@media screen and (min-width: 1004px) {
-  .button-wrapper {
-    grid-template-columns: repeat(auto-fit, minmax(10rem, max-content));
-  }
-
-  .button-wrapper.two-col {
-    justify-content: space-between;
-  }
-
-  .title {
-    margin-bottom: 48px;
-  }
 }
 
 .green {
@@ -295,11 +289,10 @@ button {
   font-weight: 700;
   padding: 1em 1.5em;
   min-width: 7em;
-  line-height: 2.2rem;
-  /* white-space: nowrap; */
+  line-height: 2rem;
 }
 
-#prev {
+.secondary-bttn {
   font-size: 1.25rem;
 }
 
@@ -309,6 +302,11 @@ button:disabled {
 
 .neutral {
   background-color: var(--neutral-color);
+}
+
+.neutral:hover,
+.neutral:focus-visible {
+  background-color: hsl(200, 100%, 71%);
 }
 
 .smash {
@@ -324,6 +322,11 @@ button:disabled {
     2px 4px 5px -2px rgba(38, 150, 25, 1);
 }
 
+.smash:hover,
+.smash:focus-visible {
+  background-color: rgb(125, 240, 112);
+}
+
 .pass {
   background-color: var(--pass-color);
   box-shadow: 5px 7px 19px -2px rgb(236, 177, 177) inset,
@@ -337,8 +340,21 @@ button:disabled {
     2px 4px 5px -2px rgb(150, 25, 25);
 }
 
-.hidden {
-  display: none;
+.pass:hover,
+.pass:focus-visible {
+  background-color: rgb(255, 76, 67);
+}
+
+.to-save {
+  justify-self: stretch;
+  grid-column: 1/-1;
+  grid-row: 1/2;
+  display: flex;
+  flex-direction: column;
+}
+
+p.percent:last-of-type {
+  margin-bottom: 16px;
 }
 
 .tier-grid {
@@ -359,15 +375,76 @@ button:disabled {
   display: flex;
   flex-grow: 1;
   flex-wrap: wrap;
-  min-height: 100px;
+  min-height: 80px;
+  max-width: 1440px;
 }
 
 .rank-label {
   min-width: 3rem;
   border-right: 5px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .sprite {
-  width: 100px;
+  width: 80px;
   aspect-ratio: 1/1;
+  /* background-color: blueviolet;
+  border: 1px solid darkcyan; */
+  font-size: 1rem;
+  cursor: grab;
+}
+
+@media screen and (min-width: 1004px) {
+  .button-wrapper {
+    grid-template-columns: repeat(auto-fit, minmax(10rem, max-content));
+  }
+
+  .button-wrapper.two-col {
+    justify-content: space-between;
+  }
+
+  .title {
+    margin-bottom: 48px;
+  }
+
+  .to-save {
+    width: 1000px;
+    justify-self: auto;
+  }
+}
+
+@media screen and (min-width: 840px) {
+  .smash-main {
+    max-width: 72rem;
+    gap: 32px;
+    justify-items: auto;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(3, auto);
+    grid-template-areas:
+      "info sprite"
+      "smash pass"
+      "num num";
+  }
+
+  #smash {
+    justify-self: end;
+    margin-inline-end: 40px;
+  }
+
+  #pass {
+    justify-self: start;
+    margin-inline-start: 40px;
+  }
+
+  .info {
+    text-align: start;
+    align-items: start;
+    gap: 16px;
+  }
+
+  .smash-img {
+    max-width: 19rem;
+  }
 }

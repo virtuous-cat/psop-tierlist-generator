@@ -32,9 +32,12 @@ saveButton.addEventListener("click", () => {
   const tierList = document.querySelector(".to-save");
   const closeButton = document.createElement("button");
   closeButton.innerText = "Close";
+  closeButton.classList.add("secondary-bttn", "neutral");
   dialog.append(closeButton);
   html2canvas(tierList, {
     ignoreElements: (element) => element.id === "ignore",
+    width: 1000,
+    windowWidth: 1400,
   }).then((canvas) => closeButton.before(canvas));
   closeButton.addEventListener("click", () => {
     dialog.close();

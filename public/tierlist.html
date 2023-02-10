@@ -7,16 +7,16 @@
     <title>Pokemon Smash or Pass Tier List Generator</title>
     <link href="/style.css" rel="stylesheet" type="text/css" media="all" />
   </head>
-  <body>
-    <main>
+  <body class="tier-body">
+    <main class="tier-main">
       <div class="to-save">
         <div class="intro">
           <p>
             Congratulations, you smashed <span id="smash-number"></span> out of
             1008 pokemon!
           </p>
-          <p>That's <span id="smash-percent"></span>%!</p>
-          <p id="ignore">Now, RANK THEM:</p>
+          <p class="percent">That's <span id="smash-percent"></span>%!</p>
+          <p id="ignore">Now, <strong>RANK THEM</strong>:</p>
         </div>
         <div class="tier-grid">
           <div class="tier">
@@ -41,16 +41,24 @@
           </div>
         </div>
       </div>
-      <p>
-        Is this a S-tier, do me now, kind of smash, or just a D-tier, wouldn't
-        kick one outta bed, smash? Drag the spites below to place them in their
-        appropriate tiers
-      </p>
+      <div class="medium-font">
+        <p>
+          Is this a S-tier, do me now, kind of smash, or just a D-tier, wouldn't
+          kick one outta bed, smash?
+        </p>
+        <p>
+          Drag the spites from below to place them in their appropriate tiers:
+        </p>
+      </div>
       <div class="sprites-container" id="unranked"></div>
       <dialog>
-        <p>Right-click and save image to download your tier list:</p>
+        <p class="medium-font">
+          Right-click and save image to download your tier list:
+        </p>
       </dialog>
-      <button id="save">Save tier list as an image</button>
+      <button class="neutral secondary-bttn" id="save">
+        Save tier list as an image
+      </button>
     </main>
     <footer>
       <p>
@@ -58,7 +66,7 @@
         to worry about finishing in one go. If you are using a shared computer
         you may wish to clear this data when you're done.
       </p>
-      <button id="clear">Clear all data and return Home</button>
+      <button id="clear" class="neutral">Clear all data and return Home</button>
     </footer>
 
     <script
