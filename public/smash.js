@@ -45,7 +45,7 @@ const loadPokemon = async (id) => {
     console.log(pokemon);
     pokemonName.innerText = capitalize(pokemon.name);
     height.innerText = pokemon.height * 10;
-    weight.innerText = pokemon.weight * 0.1;
+    weight.innerText = (pokemon.weight * 0.1).toFixed(1);
     types.innerText = capitalize(pokemon.types[0].type.name);
     pokemon.types.forEach((type, i) => {
       if (i >= 1) {

@@ -12,10 +12,10 @@
       <div class="to-save">
         <div class="intro">
           <p>
-            Congratulations, you smashed <span id="smash-number"></span> out of
-            1008 pokemon!
+            Congratulations, you smashed <span class="smash-number"></span> out
+            of 1008 pokemon!
           </p>
-          <p class="percent">That's <span id="smash-percent"></span>%!</p>
+          <p class="percent">That's <span class="smash-percent"></span>%!</p>
           <p id="ignore">Now, <strong>RANK THEM</strong>:</p>
         </div>
         <div class="tier-grid">
@@ -40,8 +40,11 @@
             <div class="rank-slot sprites-container" id="d"></div>
           </div>
         </div>
+        <p class="hidden attribution">
+          Created at <span class="blue-text">pokesmash.neocities.org</span>
+        </p>
       </div>
-      <div class="medium-font">
+      <div>
         <p>
           Is this a S-tier, do me now, kind of smash, or just a D-tier, wouldn't
           kick one outta bed, smash?
@@ -52,12 +55,22 @@
       </div>
       <div class="sprites-container" id="unranked"></div>
       <dialog>
-        <p class="medium-font">
+        <p class="canvas-hook">
           Right-click and save image to download your tier list:
         </p>
+        <p>Auto-generated image description (copy text):</p>
+        <div class="description medium-font">
+          <p>
+            Image of tier list with pokemon sprites arranged into tiers. It
+            reads, "Congratulations, you smashed
+            <span class="smash-number"></span> out of 1008 pokemon! That's
+            <span class="smash-percent"></span>%!" at the top, and "Created at
+            pokesmash.neocities.org" at the bottom.
+          </p>
+        </div>
       </dialog>
       <button class="neutral secondary-bttn" id="save">
-        Save tier list as an image
+        Save tier list as an image and/or text
       </button>
     </main>
     <footer>

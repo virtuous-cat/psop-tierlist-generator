@@ -30,20 +30,50 @@ const dialog = document.querySelector("dialog");
 saveButton.addEventListener("click", () => {
   dialog.showModal();
   const tierList = document.querySelector(".to-save");
+  const canvasHook = document.querySelector(".canvas-hook");
+  const attribution = document.querySelector(".attribution");
+  const imgDescription = document.querySelector(".description");
+  const sList = listTier("s");
+  const aList = listTier("a");
+  const bList = listTier("b");
+  const cList = listTier("c");
+  const dList = listTier("d");
+  imgDescription.append(sList, aList, bList, cList, dList);
   const closeButton = document.createElement("button");
   closeButton.innerText = "Close";
   closeButton.classList.add("secondary-bttn", "neutral");
   dialog.append(closeButton);
+  attribution.classList.remove("hidden");
   html2canvas(tierList, {
     ignoreElements: (element) => element.id === "ignore",
     width: 1000,
     windowWidth: 1400,
-  }).then((canvas) => closeButton.before(canvas));
+  }).then((canvas) => {
+    canvasHook.after(canvas);
+    attribution.classList.add("hidden");
+    dialog.addEventListener(
+      "close",
+      () => {
+        canvas.remove();
+      },
+      { once: true }
+    );
+  });
   closeButton.addEventListener("click", () => {
     dialog.close();
-    dialog.querySelector("canvas").remove();
-    closeButton.remove();
   });
+  dialog.addEventListener(
+    "close",
+    () => {
+      closeButton.remove();
+      sList.remove();
+      aList.remove();
+      bList.remove();
+      cList.remove();
+      dList.remove();
+    },
+    { once: true }
+  );
 });
 
 const drake = dragula([sSlot, aSlot, bSlot, cSlot, dSlot, unrankedSlot], {
@@ -77,6 +107,25 @@ const getName = (pokemonId) => {
   }
 };
 
+const listTier = (tier) => {
+  const p = document.createElement("p");
+  if (!localData.haskey(tier) || localData.get(tier).length < 1) {
+    p.innerText = `${tier.toUpperCase()} tier: Empty.`;
+    return p;
+  }
+  tierArray = localData.get(tier);
+  p.innerText = `${tier.toUpperCase()} tier: ${tierArray.reduce(
+    (list, pokemonId, currentIndex) => {
+      if (currentIndex === tierArray.length - 1) {
+        return list.concat(`${getName(pokemonId)}`);
+      }
+      return list.concat(`${getName(pokemonId)}, `);
+    },
+    ""
+  )}.`;
+  return p;
+};
+
 const buildTier = (tier, tierName, slot) => {
   if (!tier.length) {
     return;
@@ -101,13 +150,13 @@ function populate() {
   if (!smashedPokemon.length || !smashedIds.length) {
     return;
   }
-  const smashNumber = document.querySelector("#smash-number");
-  const smashPercent = document.querySelector("#smash-percent");
-  smashNumber.innerText = `${smashedPokemon.length}`;
-  smashPercent.innerText = `${Math.round(
-    (smashedPokemon.length / 1008) * 100
-  )}`;
-
+  const smashNumber = document.querySelectorAll(".smash-number");
+  const smashPercent = document.querySelectorAll(".smash-percent");
+  smashNumber.forEach((span) => (span.innerText = `${smashedPokemon.length}`));
+  smashPercent.forEach(
+    (span) =>
+      (span.innerText = `${Math.round((smashedPokemon.length / 1008) * 100)}`)
+  );
   const s = localData.haskey("s") ? localData.get("s") : [];
   const a = localData.haskey("a") ? localData.get("a") : [];
   const b = localData.haskey("b") ? localData.get("b") : [];
