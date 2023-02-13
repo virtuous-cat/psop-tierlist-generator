@@ -376,6 +376,7 @@ p.percent:last-of-type {
   flex-grow: 1;
   flex-wrap: wrap;
   min-height: 80px;
+  min-width: 80px;
   max-width: 1440px;
 }
 
@@ -387,6 +388,23 @@ p.percent:last-of-type {
   justify-content: center;
 }
 
+.rank-slot {
+  position: relative;
+}
+
+.collapse-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 1rem;
+  border-radius: 0;
+}
+
+.collapsed {
+  max-height: 80px;
+  overflow-y: scroll;
+}
+
 .sprite {
   width: 80px;
   aspect-ratio: 1/1;
@@ -394,6 +412,10 @@ p.percent:last-of-type {
   border: 1px solid darkcyan; */
   font-size: 1rem;
   cursor: grab;
+}
+
+#unranked {
+  justify-self: stretch;
 }
 
 dialog p {
@@ -409,6 +431,7 @@ canvas,
 
 .description p {
   margin-bottom: 0;
+  font-size: 1rem;
 }
 
 dialog button {
@@ -447,6 +470,10 @@ dialog::backdrop {
 }
 .tier:nth-child(5) {
   background-color: hsl(231, 80%, 66%);
+}
+
+.wide-only {
+  display: none;
 }
 
 @media screen and (min-width: 1004px) {
@@ -499,5 +526,11 @@ dialog::backdrop {
 
   .smash-img {
     max-width: 19rem;
+  }
+}
+
+@media screen and (min-width: 340px) {
+  .wide-only {
+    display: block;
   }
 }

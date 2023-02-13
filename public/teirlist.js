@@ -25,6 +25,24 @@ const cSlot = document.querySelector("#c");
 const dSlot = document.querySelector("#d");
 const unrankedSlot = document.querySelector("#unranked");
 
+const sButton = document.querySelector("#s-btn");
+const aButton = document.querySelector("#a-btn");
+const bButton = document.querySelector("#b-btn");
+const cButton = document.querySelector("#c-btn");
+const dButton = document.querySelector("#d-btn");
+const collapsePairs = [
+  { button: sButton, slot: sSlot },
+  { button: aButton, slot: aSlot },
+  { button: bButton, slot: bSlot },
+  { button: cButton, slot: cSlot },
+  { button: dButton, slot: dSlot },
+];
+for (const pair of collapsePairs) {
+  pair.button.addEventListener("click", (e) => {
+    toggleCollapse(pair.slot, e.currentTarget);
+  });
+}
+
 const saveButton = document.querySelector("#save");
 const dialog = document.querySelector("dialog");
 saveButton.addEventListener("click", () => {
@@ -33,24 +51,58 @@ saveButton.addEventListener("click", () => {
   const canvasHook = document.querySelector(".canvas-hook");
   const attribution = document.querySelector(".attribution");
   const imgDescription = document.querySelector(".description");
+  const copyButton = document.querySelector(".copy");
   const sList = listTier("s");
   const aList = listTier("a");
   const bList = listTier("b");
   const cList = listTier("c");
   const dList = listTier("d");
-  imgDescription.append(sList, aList, bList, cList, dList);
+  const lists = [sList, aList, bList, cList, dList];
+  imgDescription.append(...lists);
+  copyText = lists.reduce(
+    (text, p) => text.concat(`\n${p.innerText}`),
+    `Image of tier list with pokemon sprites arranged into tiers. It reads, "Congratulations, you smashed ${
+      smashedPokemon.length
+    } out of 1008 pokemon! That's ${Math.round(
+      (smashedPokemon.length / 1008) * 100
+    )}%!" at the top, and "Created at pokesmash.neocities.org" at the bottom.`
+  );
+  copyButton.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(copyText);
+      copyButton.innerText = "Copied!";
+      setTimeout(() => (copyButton.innerText = "Copy text"), 2000);
+    } catch (error) {
+      console.log(error);
+      copyButton.innerText = "Error :(";
+      setTimeout(() => (copyButton.innerText = "Copy text"), 2000);
+    }
+  });
   const closeButton = document.createElement("button");
   closeButton.innerText = "Close";
   closeButton.classList.add("secondary-bttn", "neutral");
   dialog.append(closeButton);
   attribution.classList.remove("hidden");
+  const expanded = collapsePairs.map((pair) => {
+    if (!pair.slot.classList.contains("collapsed")) {
+      return;
+    }
+    pair.slot.classList.remove("collapsed");
+    return pair.slot;
+  });
   html2canvas(tierList, {
-    ignoreElements: (element) => element.id === "ignore",
+    ignoreElements: (element) => element.classList.contains("ignore"),
     width: 1000,
     windowWidth: 1400,
   }).then((canvas) => {
     canvasHook.after(canvas);
     attribution.classList.add("hidden");
+    for (const slot of expanded) {
+      if (!slot) {
+        continue;
+      }
+      slot.classList.add("collapsed");
+    }
     dialog.addEventListener(
       "close",
       () => {
@@ -71,6 +123,17 @@ saveButton.addEventListener("click", () => {
       bList.remove();
       cList.remove();
       dList.remove();
+      copyButton.removeEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(copyText);
+          copyButton.innerText = "Copied!";
+          setTimeout(() => (copyButton.innerText = "Copy text"), 2000);
+        } catch (error) {
+          console.log(error);
+          copyButton.innerText = "Error :(";
+          setTimeout(() => (copyButton.innerText = "Copy text"), 2000);
+        }
+      });
     },
     { once: true }
   );
@@ -98,6 +161,11 @@ drake.on("drop", (el, target, source, sibling) => {
   }
   localData.push(targetRank, pokemonId);
 });
+
+const toggleCollapse = (slot, element) => {
+  const collapsed = slot.classList.toggle("collapsed");
+  element.innerText = collapsed ? "Expand tier" : "Collapse tier";
+};
 
 const getName = (pokemonId) => {
   for (const pokemon of smashedPokemon) {
